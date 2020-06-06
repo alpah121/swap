@@ -24,16 +24,15 @@ let page = req.query.page || "0";
 if (!isNaN(parseInt(page)))
 	{
 	let offset = parseInt(page) * 20;
-	let sql = await sql("SELECT * FROM offers LIMIT " . offset . ", 20");
+	let sql = await sql("SELECT * FROM offers LIMIT " + offset + ", 20");
 	}
-else 
+else
 	{
-	let sql = await sql("SELECT * FROM offers LIMIT 0, 20");	
+	let sql = await sql("SELECT * FROM offers LIMIT 0, 20");
 	}
 });
 
 router.get('/create', isLoggedIn, (req, res) => {
 let profile = await	sql("SELECT * FROM users WHERE id='" + req.session.id + "';");
-res.render('createOffer', {"services": profile.services});	
+res.render('createOffer', {"services": profile.services});
 });
-
